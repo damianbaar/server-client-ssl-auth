@@ -2,9 +2,9 @@ var tls = require('tls'),
     fs = require('fs');
 
 var options = {
-  key: fs.readFileSync('client.key'),
-  cert: fs.readFileSync('client.crt'),
-  ca: fs.readFileSync('ca.crt'),
+  key: fs.readFileSync('./cert/client.key'),
+  cert: fs.readFileSync('./cert/client.crt'),
+  ca: fs.readFileSync('./cert/ca.crt'),
   passphrase: 'damian',
   requestCert: true,
   rejectUnauthorized: false
