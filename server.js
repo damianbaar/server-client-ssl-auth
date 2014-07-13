@@ -1,0 +1,29 @@
+var tls = require('tls'),
+    fs = require('fs'),
+    colors = require('colors'),
+    msg = [
+            ".-..-..-.  .-.   .-. .--. .---. .-.   .---. .-.",
+            ": :; :: :  : :.-.: :: ,. :: .; :: :   : .  :: :",
+            ":    :: :  : :: :: :: :: ::   .': :   : :: :: :",
+            ": :: :: :  : `' `' ;: :; :: :.`.: :__ : :; ::_;",
+            ":_;:_;:_;   `.,`.,' `.__.':_;:_;:___.':___.':_;" 
+          ].join("\n").cyan;
+
+var options = {
+  key: fs.readFileSync('server.key'),
+  cert: fs.readFileSync('server.crt'),
+  ca: fs.readFileSync('ca.crt'),
+  passphrase: 'damian',
+  requestCert: true,
+  rejectUnauthorized: false
+};
+
+tls.createServer(options, function (s) {
+  var cert = s.getPeerCertificate()
+    , cName = cert && cert.subject.CN 
+  if(cName === 'localhost-client') {
+    console.log('writing to client', cName)
+    s.write(msg+"\n")
+    s.pipe(s)
+  }
+}).listen(8000);
