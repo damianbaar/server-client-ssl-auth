@@ -10,8 +10,7 @@ nothing fancy ...  client/server ssl authentication
 
 ###Certs for development
 
-###CA
-* CA Key and Certificate for signing Client Certs
+###CA Key and Certificate for signing Client Certs
 
 `openssl genrsa -des3 -out ca.key 4096`
 
