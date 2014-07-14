@@ -15,12 +15,13 @@ var options = {
   ca: fs.readFileSync('./cert/ca.crt'),
   passphrase: 'damian',
   requestCert: true,
-  rejectUnauthorized: false
+  rejectUnauthorized: true
 };
 
 tls.createServer(options, function (s) {
   var cert = s.getPeerCertificate()
     , cName = cert && cert.subject.CN 
+
   if(cName === 'localhost-client') {
     console.log('writing to client', cName)
     s.write(msg+"\n")

@@ -7,7 +7,7 @@ var options = {
   ca: fs.readFileSync('./cert/ca.crt'),
   passphrase: 'damian',
   requestCert: true,
-  rejectUnauthorized: false
+  rejectUnauthorized: true
 };
 
 var conn = tls.connect(8000, options, function() {
